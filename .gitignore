@@ -1,0 +1,12 @@
+/bin/
+*.exe
+*.test
+*.out
+/dist/
+/tmp/
+# Per-binary artifacts from `go build` in the repo root
+/pricewise
+/moc
+/capella
+/safeway
+/fredmeyer
