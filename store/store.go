@@ -37,6 +37,32 @@ func ServesZIP(s Store, zip string) bool {
 	return true
 }
 
+// WithZIPPrefix wraps s so that ServesZIP returns true only for ZIPs
+// starting with one of the given prefixes. A zero-config way to scope
+// Flipp-backed regional chains without writing a dedicated adapter.
+func WithZIPPrefix(s Store, prefixes ...string) Store {
+	return &regionalStore{inner: s, prefixes: prefixes}
+}
+
+type regionalStore struct {
+	inner    Store
+	prefixes []string
+}
+
+func (r *regionalStore) Name() string { return r.inner.Name() }
+func (r *regionalStore) Fetch(ctx context.Context) ([]Item, error) {
+	return r.inner.Fetch(ctx)
+}
+func (r *regionalStore) ServesZIP(zip string) bool {
+	z := strings.TrimSpace(zip)
+	for _, p := range r.prefixes {
+		if strings.HasPrefix(z, p) {
+			return true
+		}
+	}
+	return false
+}
+
 // Item is the normalized shape every adapter emits.
 //
 // Not every store provides every field. Missing fields are zero-valued.

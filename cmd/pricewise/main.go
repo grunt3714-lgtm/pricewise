@@ -32,6 +32,24 @@ import (
 //
 // Alphabetical by ID for stable output.
 func registry(zip string) []store.Store {
+	// Regional ZIP-prefix sets. Each Flipp call costs a listing round-trip
+	// regardless of whether the merchant serves the area, so chains with
+	// tight geographic footprints are gated to avoid dragging down queries
+	// for ZIPs they don't cover.
+	midwest := []string{
+		"40", "41", "42", // KY
+		"43", "44", "45", // OH
+		"46", "47", // IN
+		"48", "49", // MI
+		"50", "51", "52", // IA
+		"53", "54", // WI
+		"55", "56", // MN
+		"60", "61", "62", // IL
+		"63", "64", "65", // MO
+	}
+	ilIaIn := []string{"46", "47", "50", "51", "52", "60", "61", "62"}
+	ilChicago := []string{"60", "61"}
+
 	all := []store.Store{
 		flipp.New("albertsons", "Albertsons", zip),
 		flipp.New("aldi", "ALDI", zip),
@@ -44,15 +62,15 @@ func registry(zip string) []store.Store {
 		store.NewMulti("fredmeyer",
 			kroger.New(zip),
 			flipp.New("fredmeyer", "Fred Meyer", zip)),
-		flipp.New("freshthyme", "Fresh Thyme Market", zip),
+		store.WithZIPPrefix(flipp.New("freshthyme", "Fresh Thyme Market", zip), midwest...),
 		flipp.New("groceryoutlet", "Grocery Outlet", zip),
-		flipp.New("jewelosco", "Jewel-Osco", zip),
-		flipp.New("marianos", "Mariano's", zip),
-		flipp.New("meijer", "Meijer", zip),
+		store.WithZIPPrefix(flipp.New("jewelosco", "Jewel-Osco", zip), ilIaIn...),
+		store.WithZIPPrefix(flipp.New("marianos", "Mariano's", zip), ilChicago...),
+		store.WithZIPPrefix(flipp.New("meijer", "Meijer", zip), midwest...),
 		moc.New(),
-		flipp.New("petesfresh", "Pete's Fresh Market", zip),
+		store.WithZIPPrefix(flipp.New("petesfresh", "Pete's Fresh Market", zip), ilChicago...),
 		flipp.New("safeway", "Safeway", zip),
-		flipp.New("tonysfresh", "Tony's Fresh Market", zip),
+		store.WithZIPPrefix(flipp.New("tonysfresh", "Tony's Fresh Market", zip), ilChicago...),
 		flipp.New("walmart", "Walmart", zip),
 	}
 	out := make([]store.Store, 0, len(all))
