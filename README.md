@@ -31,21 +31,29 @@ knows how to install the CLI and query weekly specials for any ZIP.
 
 ## Supported stores
 
-Six national chains are covered via [Flipp](https://flipp.com/) wherever
-their flyers are available. Fred Meyer has an opt-in Kroger-API backend
-for the full catalog. Two regional Oregon chains are included as
+National and regional chains are covered via [Flipp](https://flipp.com/)
+wherever their flyers are available. Fred Meyer has an opt-in Kroger-API
+backend for the full catalog. Two regional Oregon chains are included as
 examples of direct-site adapters and only activate for Oregon ZIPs.
 
-| Store            | ID              | Direct backend              | Flipp | Region     |
-|------------------|-----------------|-----------------------------|:-----:|------------|
-| Fred Meyer       | `fredmeyer`     | Kroger API (opt-in, OAuth)  |   ✓   | anywhere   |
-| Safeway          | `safeway`       | –                           |   ✓   | anywhere   |
-| Albertsons       | `albertsons`    | –                           |   ✓   | anywhere   |
-| Grocery Outlet   | `groceryoutlet` | –                           |   ✓   | anywhere   |
-| Costco           | `costco`        | –                           |   ✓   | anywhere   |
-| Walmart          | `walmart`       | –                           |   ✓   | anywhere   |
-| Market of Choice | `moc`           | WordPress REST API          |   –   | 97xxx (OR) |
-| Capella Market   | `capella`       | `flyertext.html`            |   –   | 974xx (OR) |
+| Store              | ID              | Direct backend              | Flipp | Region          |
+|--------------------|-----------------|-----------------------------|:-----:|-----------------|
+| Fred Meyer         | `fredmeyer`     | Kroger API (opt-in, OAuth)  |   ✓   | anywhere        |
+| Safeway            | `safeway`       | –                           |   ✓   | anywhere        |
+| Albertsons         | `albertsons`    | –                           |   ✓   | anywhere        |
+| Grocery Outlet     | `groceryoutlet` | –                           |   ✓   | anywhere        |
+| Costco             | `costco`        | –                           |   ✓   | anywhere        |
+| Walmart            | `walmart`       | –                           |   ✓   | anywhere        |
+| ALDI               | `aldi`          | –                           |   ✓   | anywhere        |
+| Meijer             | `meijer`        | –                           |   ✓   | Midwest         |
+| Jewel-Osco         | `jewelosco`     | –                           |   ✓   | IL/IA/IN        |
+| Mariano's          | `marianos`      | –                           |   ✓   | Chicago metro   |
+| Food 4 Less        | `food4less`     | –                           |   ✓   | anywhere        |
+| Fresh Thyme Market | `freshthyme`    | –                           |   ✓   | Midwest         |
+| Pete's Fresh Market| `petesfresh`    | –                           |   ✓   | Chicago metro   |
+| Tony's Fresh Market| `tonysfresh`    | –                           |   ✓   | Chicago metro   |
+| Market of Choice   | `moc`           | WordPress REST API          |   –   | 97xxx (OR)      |
+| Capella Market     | `capella`       | `flyertext.html`            |   –   | 974xx (OR)      |
 
 ### Data quality per backend
 

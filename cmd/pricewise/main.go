@@ -34,17 +34,25 @@ import (
 func registry(zip string) []store.Store {
 	all := []store.Store{
 		flipp.New("albertsons", "Albertsons", zip),
+		flipp.New("aldi", "ALDI", zip),
 		capella.New(),
 		flipp.New("costco", "Costco", zip),
+		flipp.New("food4less", "Food 4 Less", zip),
 		// Fred Meyer: prefer Kroger direct (full catalog, needs
 		// KROGER_CLIENT_ID/SECRET); fall back to Flipp (weekly ad
 		// only, zero setup) when credentials aren't present.
 		store.NewMulti("fredmeyer",
 			kroger.New(zip),
 			flipp.New("fredmeyer", "Fred Meyer", zip)),
+		flipp.New("freshthyme", "Fresh Thyme Market", zip),
 		flipp.New("groceryoutlet", "Grocery Outlet", zip),
+		flipp.New("jewelosco", "Jewel-Osco", zip),
+		flipp.New("marianos", "Mariano's", zip),
+		flipp.New("meijer", "Meijer", zip),
 		moc.New(),
+		flipp.New("petesfresh", "Pete's Fresh Market", zip),
 		flipp.New("safeway", "Safeway", zip),
+		flipp.New("tonysfresh", "Tony's Fresh Market", zip),
 		flipp.New("walmart", "Walmart", zip),
 	}
 	out := make([]store.Store, 0, len(all))
